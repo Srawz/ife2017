@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>words or number</title>
+</head>
+<body>
+<input id='str'></input>
+
+<button id='numbtn'>is number?</button>
+<button id='strbtn'>repeat？</button>
+
+<script>
+  const str  = document.querySelector("#str");
+  const numbtn  = document.querySelector("#numbtn");
+  const strbtn  = document.querySelector("#strbtn");
+  function isNumber(){
+
+    if((/^0?1[3|4|5|8][0-9]\d{8}$/).test(str.value)){
+      // console.log('1');
+      // console.log(str.value);
+      alert('yes');
+    }else{
+      alert('no');
+    }
+
+  }
+  function isRepeat() {
+    var a = str.value;
+
+    res = a.split(' ');
+
+    for(var i = 0;i < res.length;i++){
+      if(res[i] == res[i+1]){
+        alert('yes');
+        return;
+      }
+    }
+    alert('no');
+  }
+  numbtn.addEventListener('click',isNumber);
+  strbtn.addEventListener('click',isRepeat);
+</script>
+
+</body>
+
+</html>
