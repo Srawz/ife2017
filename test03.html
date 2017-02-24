@@ -28,15 +28,12 @@
   function isRepeat() {
     var a = str.value;
 
-    res = a.split(' ');
-
-    for(var i = 0;i < res.length;i++){
-      if(res[i] == res[i+1]){
-        alert('yes');
-        return;
-      }
+    if((/\b([a-zA-Z]+)\s(?=\1)/).test(a)){
+      alert('yes');
+    }else{
+      alert('no');
     }
-    alert('no');
+
   }
   numbtn.addEventListener('click',isNumber);
   strbtn.addEventListener('click',isRepeat);
