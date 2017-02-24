@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>click menu</title>
+  <style type="text/css">
+  .right{
+    width: 500px;
+    height: 500px;
+    font-size: 50px;
+    user-select:none;
+    background: grey;
+  }
+  .menu{
+    display: none;
+    user-select:none;
+    position: absolute;
+    font-size: 20px;
+    border:1px solid #fff;
+  }
+  .open{
+    display: block;
+  }
+  </style>
+</head>
+<body>
+<div oncontextmenu="clickRight()" contextmenu="mymenu" class="right">click here</div>
+
+<div class="menu">
+  <p>menu item 1</p>
+  <p>menu item 2</p>
+</div>
+<script>
+  const mu  = document.querySelector('.menu');
+  var a = "";
+  document.oncontextmenu = function(){
+      return false;
+  }
+
+  document.onmousemove = function(e){
+    e=e? e:window.event;
+    a = e;
+  }
+
+  function clickRight(){
+    mu.classList.add('open');
+    if(a.screenX<400){
+      mu.style.setProperty('left',  `${a.screenX}px`);
+      mu.style.setProperty('top', `${a.screenY-120}px`);
+    }
+    else{
+      mu.style.setProperty('left',  `${a.screenX-120}px`);
+      mu.style.setProperty('top', `${a.screenY-120}px`);
+    }
+  }
+
+  function dis(){
+    mu.classList.remove('open');
+  }
+
+  document.addEventListener('click', dis);
+</script>
+
+</body>
+
+</html>
