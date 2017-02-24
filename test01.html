@@ -1,48 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>css sprite</title>
-    <style>
-        p{
-            display: inline-flex;
-        }
-        .circimg{
-            width: 30px;
-            height: 30px;
-            background:url("99322cf8c3283e42.png");
-            background-repeat: no-repeat;
-            display: inline-block;
-            background-position: -10px 0px;
-
-        }
-        .squimg{
-            width: 30px;
-            height: 30px;
-            background:url("99322cf8c3283e42.png");
-            background-repeat: no-repeat;
-            display: inline-block;
-            background-position: -10px -30px;
-
-        }
-        input{
-            display: none;
-        }
-        #circ:checked ~ .circimg{
-            background-position: -50px 0px;
-        }
-        #squ:checked ~ .squimg{
-            background-position: -50px -30px;
-        }
-
-    </style>
+  <meta charset="utf-8">
+  <title>css sprite</title>
+  <style type="text/css">
+    input {
+      display: none;
+    }
+    .bgp label {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: url(99322cf8c3283e42.png) no-repeat -24px -10px;
+    }
+    .bgp label[for*="squ"] {
+      background-position: -24px -32px;
+    }
+    .bgp input[id="circ1"]:checked ~ label[for="circ1"] {
+      background-position: -59px -10px;
+    }
+    .bgp input[id="circ2"]:checked ~ label[for="circ2"] {
+      background-position: -59px -10px;
+    }
+    .bgp input[id="squ1"]:checked ~ label[for="squ1"] {
+      background-position: -59px -32px;
+    }
+    .bgp input[id="squ2"]:checked ~ label[for="squ2"] {
+      background-position: -59px -32px;
+    }
+    .weil label {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      position: relative;
+    }
+    .weil label[for*="wsqu"] {
+      width: 12px;
+      height: 12px;
+      border-radius: 0;
+    }
+    .weil input:checked + label {
+      border-color: red;
+    }
+    .weil input[id*="wcirc"]:checked + label:after {
+      content: "";
+      box-sizing: border-box;
+      width: 6px;
+      height: 6px;
+      background-color: #f00;
+      border-radius: 5px;
+      display: block;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+    .weil input[id*="wsqu"]:checked + label:after {
+      content: "1";
+      color: transparent;
+      box-sizing: border-box;
+      width: 8px;
+      height: 5px;
+      border: 2px solid #f00;
+      border-top: transparent;
+      border-right: transparent;
+      transform: rotate(-30deg);
+      -ms-transform: rotate(-30deg);
+      position: absolute;
+      top: 3px;
+      left: 2px;
+    }
+  </style>
 </head>
 <body>
-<input type="radio" name="radio" id="circ"/>
-<input type="radio" name="radio" id="squ"/>
-<div class="circimg"></div>
-<p><label for="circ">click me</label></p>
-<div class="squimg"></div>
-<p><label for="squ">click me</label></p>
+
+  <div class="bgp">
+    <p>background position</p>
+    <input type="radio" name="radio" id="circ1">
+    <label for="circ1"></label>
+    <input type="radio" name="radio" id="circ2">
+    <label for="circ2"></label>
+    <input type="checkbox" id="squ1">
+    <label for="squ1"></label>
+    <input type="checkbox" id="squ2">
+    <label for="squ2"></label>
+  </div>
+  <div class="weil">
+    <p>伪类</p>
+    <input type="radio" name="radio" id="wcirc1">
+    <label for="wcirc1"></label>
+    <input type="radio" name="radio" id="wcirc2">
+    <label for="wcirc2"></label>
+    <input type="checkbox" id="wsqu1">
+    <label for="wsqu1"></label>
+    <input type="checkbox" id="wsqu2">
+    <label for="wsqu2"></label>
+  </div>
+
 </body>
 </html>
