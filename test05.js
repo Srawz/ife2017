@@ -1,4 +1,3 @@
-
 var system = require('system');
 var page = require('webpage').create();
 var keyWord = 'ife';

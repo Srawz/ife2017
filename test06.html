@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>css blur</title>
+  <style type="text/css">
+    #bear{
+      width: 450px;
+      height: 400px;
+    }
+    /*当鼠标悬停时*/
+    .on{
+      filter: blur(5px);
+    }
+    /*设置before 和 after*/
+    div::before, div::after {
+      box-sizing: border-box;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+    }
+
+
+    #ife{
+      position: absolute;
+      top: 70px;
+      left: 75px;
+      width: 300px;
+      height: 250px;
+    }
+    #ife::before {
+      border-top: 5px solid #fff;
+      border-bottom: 5px solid #fff;
+      -webkit-transform: scale3d(0, 1, 1);
+      -webkit-transition: -webkit-transform 0.5s;
+
+    }
+    #ife::after {
+      border-left: 5px solid #fff;
+      border-right: 5px solid #fff;
+      -webkit-transform: scale3d(1, 0, 1);
+      -webkit-transition: -webkit-transform 0.5s;
+
+    }
+    #ife:hover::before, #ife:hover::after {
+      -webkit-transform: scale3d(1, 1, 1);
+      -webkit-transition: -webkit-transform 0.5s;
+    }
+
+
+    #ife:hover > p{
+      opacity: 1;
+    }
+
+    #ife p{
+      text-align: center;
+      opacity: 0;
+    }
+    #ife p:first-child{
+      font-size: 80px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 20px;
+
+      /*设置渐变颜色*/
+      background-image: -webkit-linear-gradient(left, #147B96, #E6D205 25%, #147B96 50%, #E6D205 75%, #147B96);
+      /*字体设为透明*/
+      -webkit-text-fill-color: transparent;
+      /*只让字的部分有颜色*/
+      -webkit-background-clip: text;
+      /*利用宽度控制渐变周期*/
+      -webkit-background-size: 200% 100%;
+      /*自动动画函数*/
+      -webkit-animation: masked-animation 4s infinite linear;
+    }
+    @-webkit-keyframes masked-animation {
+      0%  { background-position: 0 0;}
+      100% { background-position: -100% 0;}
+    }
+    #ife p:last-child{
+      font-size: 20px;
+      letter-spacing: 20px;
+
+      -webkit-animation: masked2-animation 1s infinite linear;
+
+    }
+    /*设置关键帧*/
+    @-webkit-keyframes masked2-animation {
+      0%  { color: red;}
+      100% { color: green;}
+    }
+  </style>
+</head>
+<body>
+
+  <img id="bear" src="./屏幕快照 2017-02-26 上午11.22.47.png"/>
+  <div id="ife">
+    <p>IFE</p>
+    <P>2017</p>
+  </div>
+</body>
+<script>
+  var mife = document.querySelectorAll('#ife');
+  var mbear = document.querySelectorAll('#bear');
+  function beBlur(){
+    bear.classList.add('on');
+    console.log('1');
+  }
+  function disBlur(){
+    console.log('2');
+    bear.classList.remove('on');
+
+  }
+  mife.forEach(mife => mife.addEventListener('mouseenter', beBlur));
+  mife.forEach(mife => mife.addEventListener('mouseleave', disBlur));
+
+</script>
+</html>
