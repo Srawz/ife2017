@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>roll</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .img-roll{
+            box-sizing: border-box;
+            perspective: 600px;
+            transform-style: preserve-3d;
+
+        }
+        img{
+            position: absolute;
+            top: calc(50% - 100px);
+            left: calc(50% - 150px);
+            width: 300px;
+            height: 200px;
+        }
+        .font-left{
+            transform: translateX(-150%) translateZ(0px) rotateY(-90deg);
+            animation: fleft 1s linear ;
+
+        }
+        .font{
+            transform: translateX(0%) translateZ(400px) rotateY(0deg);
+            animation: font 1s linear ;
+
+        }
+        .font-right{
+            transform: translateX(150%) translateZ(0px) rotateY(90deg);
+            animation: fright 1s linear ;
+
+        }
+        .back-right{
+            transform: translateX(100%) translateZ(-300px) rotateY(135deg);
+            animation: bright 1s linear ;
+
+        }
+        .back{
+            transform: translateX(0%) translateZ(-500px) rotateY(0deg);
+            animation: back 1s linear ;
+
+        }
+        .back-left{
+            transform: translateX(-100%) translateZ(-300px) rotateY(-135deg);
+            animation: bleft 1s linear ;
+
+        }
+        @-webkit-keyframes font {
+            0%{
+                transform: translateX(150%) translateZ(0px) rotateY(90deg);
+
+            }
+            100%{
+                transform: translateX(0%) translateZ(400px) rotateY(0deg);
+            }
+
+        }
+        @-webkit-keyframes fleft {
+            0%{
+                transform: translateX(0%) translateZ(400px) rotateY(0deg);
+
+            }
+            100%{
+                transform: translateX(-150%) translateZ(0px) rotateY(-90deg);
+            }
+
+        }
+        @-webkit-keyframes fright {
+            0%{
+                transform: translateX(100%) translateZ(-300px) rotateY(135deg);
+
+            }
+            100%{
+                transform: translateX(150%) translateZ(0px) rotateY(90deg);
+            }
+
+        }
+        @-webkit-keyframes back {
+            0%{
+                transform: translateX(100%) translateZ(-300px) rotateY(135deg);
+
+            }
+            100%{
+                transform: translateX(0%) translateZ(-500px) rotateY(0deg);
+            }
+
+        }
+        @-webkit-keyframes bleft {
+            0%{
+                transform: translateX(0%) translateZ(-500px) rotateY(0deg);
+
+            }
+            100%{
+                transform: translateX(-100%) translateZ(-300px) rotateY(-135deg);
+            }
+
+        }
+        @-webkit-keyframes bright {
+            0%{
+                transform: translateX(150%) translateZ(0px) rotateY(90deg);
+
+            }
+            100%{
+                transform: translateX(100%) translateZ(-300px) rotateY(135deg);
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="img-roll">
+    <img class="font-left" src="./img/IMG_4392.jpg">
+    <img class="font" src="./img/IMG_4395.jpg">
+    <img class="font-right" src="./img/IMG_4396.jpg">
+    <img class="back-right" src="./img/IMG_4397.jpg">
+    <img class="back" src="./img/IMG_4398.jpg">
+    <img class="back-left" src="./img/IMG_4430.jpg">
+
+</div>
+
+</body>
+<script>
+    var imgRoll = document.querySelector('.img-roll');
+    var wid = `${window.innerWidth}px`;
+    var hei =  `${window.innerHeight}px`;
+    var font = document.querySelector('.font');
+    var fontRight = document.querySelector('.font-right');
+    var fontLeft = document.querySelector('.font-left');
+    var back = document.querySelector('.back');
+    var backRight = document.querySelector('.back-right');
+    var backLeft = document.querySelector('.back-left');
+
+
+    imgRoll.style.width = wid;
+    imgRoll.style.height = hei;
+    var a = 0;
+    document.addEventListener("click", function () {
+        font.className = 'font-left';
+        fontRight.className = 'font';
+        backRight.className = 'font-right';
+        back.className = 'back-right';
+        backLeft.className = 'back';
+        fontLeft.className = 'back-left';
+        console.log(a++);
+
+    });
+    fontLeft.addEventListener("click", function(){
+       console.log('2');
+    });
+</script>
+</html>
