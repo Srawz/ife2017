@@ -5,27 +5,35 @@ function Observer(data) {
     this.data = data;
     this.walk(data);
     this.eventsBus = new Event();
+    this.setData = null;
 }
 
 let p = Observer.prototype;
 
-p.walk = function(obj) {
+p.walk = function(obj , parents = []) {
     let val;
     for (let key in obj) {
         if (obj.hasOwnProperty(key)) {
             val = obj[key];
-            if (typeof val === 'object') {
-                new Observer(val);
-            }
-
-            this.convert(key, val);
+            // if (typeof val === 'object') {
+            //     new Observer(val);
+            // }
+            this.convert(key, val,parents);
         }
     }
 };
 
-p.convert = function(key, val) {
+p.convert = function(key, val, parents) {
     let _this = this;
-    Object.defineProperty(this.data, key, {
+    if (p.toString.call(val) === '[object Object]') {
+        _this.setData = val
+        _this.walk(val, [
+            ...parents,
+            key
+        ]);
+        _this.setData = null;
+    }
+    Object.defineProperty(this.setData || this.data, key, {
         enumerable: true,
         configurable: true,
         get: function() {
@@ -33,15 +41,25 @@ p.convert = function(key, val) {
             return val
         },
         set: function(newVal) {
+            if (p.toString.call(newVal) === '[object Object]') {
+                _this.setData = newValue;
+                _this.walk(newValue);
+                _this.setData = null;
+            }
+            parents.forEach(item => {
+                _this.eventsBus.emit(item, _this.data[item])
+            })
+            _this.eventsBus.emit(key, newVal);
+
             console.log('你设置了' + key);
             console.log('新的' + key + ' = ' + newVal)
 
-            _this.eventsBus.emit(key, val, newVal);
-            val = newVal;
-
-            if (typeof newVal === 'object') {
-                new Observer(val);
-            }
+            // _this.eventsBus.emit(key, val, newVal);
+            // val = newVal;
+            //
+            // if (typeof newVal === 'object') {
+            //     new Observer(val);
+            // }
         }
     })
 };
