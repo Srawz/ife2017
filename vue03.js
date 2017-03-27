@@ -72,23 +72,24 @@ Event.prototype.emit = function(attr, ...arg) {
     })
 }
 
-let data = {
-    name: 'youngwind',
-    age: 25
-};
-
 // let data = {
-//     user: {
-//         name: "liangshaofeng",
-//         age: "24"
-//     },
-//     address: {
-//         city: "beijing"
-//     }
+//     name: 'youngwind',
+//     age: 25
 // };
+
+let data = {
+    user: {
+        name: "liangshaofeng",
+        age: "24"
+    },
+    address: {
+        city: "beijing"
+    }
+};
 
 let app = new Observer(data);
 
-app.$watch('age', function(oldVal, newVal) {
-    console.log(`我的年纪变了，原来是：${oldVal}, 现在已经是：${newVal}岁了`);
+
+app.$watch('user', function(oldVal, newVal) {
+    console.log('我的姓名发生了变化，可能是年龄变了，也可能是名字变了。');
 });

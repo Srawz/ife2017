@@ -3,7 +3,15 @@ var url = require("url");
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/test");
 var child_process = require("child_process");
+var db = mongoose.connection;
+//输出连接日志
+db.on('error', function callback() {
+    console.log("Connection error");
+});
 
+db.once('open', function callback() {
+    console.log("Mongo working!");
+});  
 var resultSchema = new mongoose.Schema({
     code: Number,
     msg: String,
